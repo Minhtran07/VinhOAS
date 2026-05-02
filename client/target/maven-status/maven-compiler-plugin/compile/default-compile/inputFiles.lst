@@ -6,7 +6,6 @@
 /Users/minhtran07/Online-Auction-System/client/src/main/java/com/bt/client/controller/LoginController.java
 /Users/minhtran07/Online-Auction-System/client/src/main/java/com/bt/client/controller/PrimaryController.java
 /Users/minhtran07/Online-Auction-System/client/src/main/java/com/bt/client/controller/RegisterController.java
-/Users/minhtran07/Online-Auction-System/client/src/main/java/com/bt/client/controller/SecondaryController.java
 /Users/minhtran07/Online-Auction-System/client/src/main/java/com/bt/client/controller/SellerController.java
 /Users/minhtran07/Online-Auction-System/client/src/main/java/com/bt/client/net/AuctionClient.java
 /Users/minhtran07/Online-Auction-System/client/src/main/java/com/bt/client/net/AuctionClientException.java

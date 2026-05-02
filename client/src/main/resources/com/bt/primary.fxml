@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
-  DEPRECATED: file FXML cũ giữ lại để tránh break tham chiếu xưa.
-  Màn hình Login mới ở login.fxml + LoginController.
--->
-<?import javafx.scene.layout.VBox?>
-<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" />

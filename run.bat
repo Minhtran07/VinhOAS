@@ -1,3 +1,0 @@
-@echo off
-echo Dang khoi dong VQTT Auction System...
-mvn javafx:run -pl client

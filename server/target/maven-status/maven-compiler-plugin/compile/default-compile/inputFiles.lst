@@ -8,12 +8,10 @@
 /Users/minhtran07/Online-Auction-System/server/src/main/java/com/bt/server/dao/BidDAO.java
 /Users/minhtran07/Online-Auction-System/server/src/main/java/com/bt/server/dao/BidPersistenceResult.java
 /Users/minhtran07/Online-Auction-System/server/src/main/java/com/bt/server/dao/BiddingTransactionDAO.java
-/Users/minhtran07/Online-Auction-System/server/src/main/java/com/bt/server/dao/DaoSmokeTest.java
 /Users/minhtran07/Online-Auction-System/server/src/main/java/com/bt/server/dao/DatabaseConnection.java
 /Users/minhtran07/Online-Auction-System/server/src/main/java/com/bt/server/dao/ItemDAO.java
 /Users/minhtran07/Online-Auction-System/server/src/main/java/com/bt/server/dao/SchemaInitializer.java
 /Users/minhtran07/Online-Auction-System/server/src/main/java/com/bt/server/dao/SqlTime.java
-/Users/minhtran07/Online-Auction-System/server/src/main/java/com/bt/server/dao/TestUser.java
 /Users/minhtran07/Online-Auction-System/server/src/main/java/com/bt/server/dao/UserDAO.java
 /Users/minhtran07/Online-Auction-System/server/src/main/java/com/bt/server/event/AuctionEventBus.java
 /Users/minhtran07/Online-Auction-System/server/src/main/java/com/bt/server/event/ConnectionObserver.java

@@ -10,7 +10,6 @@ com/bt/server/service/RatingService.class
 com/bt/server/dao/AuctionDAO.class
 com/bt/server/dao/UserDAO$1.class
 com/bt/server/dao/AuctionDAO$Binder.class
-com/bt/server/dao/DaoSmokeTest.class
 com/bt/server/dao/SchemaInitializer.class
 com/bt/server/service/WinnerStrategy.class
 com/bt/server/service/HighestBidStrategy.class
@@ -26,7 +25,6 @@ com/bt/server/service/SellerService.class
 com/bt/server/config/AppConfig.class
 com/bt/server/service/AuctionLifecycleScheduler.class
 com/bt/server/dao/ItemDAO.class
-com/bt/server/dao/TestUser.class
 com/bt/server/dao/BiddingTransactionDAO$LockedAuction.class
 com/bt/server/net/ClientConnection.class
 com/bt/server/dao/BiddingTransactionDAO.class

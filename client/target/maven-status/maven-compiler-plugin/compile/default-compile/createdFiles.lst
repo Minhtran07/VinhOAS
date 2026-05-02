@@ -3,7 +3,6 @@ com/bt/client/util/Dialogs.class
 com/bt/client/controller/DashboardController$3.class
 com/bt/client/controller/SellerController.class
 com/bt/client/net/AuctionClient.class
-com/bt/client/controller/SecondaryController.class
 com/bt/client/controller/DashboardController$1.class
 com/bt/client/App.class
 com/bt/client/session/Session.class

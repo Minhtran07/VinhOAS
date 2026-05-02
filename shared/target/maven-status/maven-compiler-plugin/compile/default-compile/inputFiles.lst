@@ -9,7 +9,6 @@
 /Users/minhtran07/Online-Auction-System/shared/src/main/java/com/bt/shared/ItemCategory.java
 /Users/minhtran07/Online-Auction-System/shared/src/main/java/com/bt/shared/ItemFactory.java
 /Users/minhtran07/Online-Auction-System/shared/src/main/java/com/bt/shared/Seller.java
-/Users/minhtran07/Online-Auction-System/shared/src/main/java/com/bt/shared/SharedSmokeTest.java
 /Users/minhtran07/Online-Auction-System/shared/src/main/java/com/bt/shared/User.java
 /Users/minhtran07/Online-Auction-System/shared/src/main/java/com/bt/shared/UserRole.java
 /Users/minhtran07/Online-Auction-System/shared/src/main/java/com/bt/shared/Vehicle.java
@@ -28,7 +27,6 @@
 /Users/minhtran07/Online-Auction-System/shared/src/main/java/com/bt/shared/protocol/MessageCodec.java
 /Users/minhtran07/Online-Auction-System/shared/src/main/java/com/bt/shared/protocol/MessageType.java
 /Users/minhtran07/Online-Auction-System/shared/src/main/java/com/bt/shared/protocol/ProtocolException.java
-/Users/minhtran07/Online-Auction-System/shared/src/main/java/com/bt/shared/protocol/ProtocolSmokeTest.java
 /Users/minhtran07/Online-Auction-System/shared/src/main/java/com/bt/shared/protocol/dto/AuctionCreatedEvent.java
 /Users/minhtran07/Online-Auction-System/shared/src/main/java/com/bt/shared/protocol/dto/AuctionDto.java
 /Users/minhtran07/Online-Auction-System/shared/src/main/java/com/bt/shared/protocol/dto/AuctionFinishedEvent.java

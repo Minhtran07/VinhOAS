@@ -22,7 +22,6 @@ com/bt/shared/protocol/MessageCodec.class
 com/bt/shared/protocol/dto/RegisterRequest.class
 com/bt/shared/protocol/MessageType.class
 com/bt/shared/protocol/dto/ErrorResponse.class
-com/bt/shared/protocol/ProtocolSmokeTest.class
 com/bt/shared/event/BidPlacedDomainEvent.class
 com/bt/shared/protocol/dto/CreateItemRequest.class
 com/bt/shared/protocol/dto/PayAuctionResponse.class
@@ -57,7 +56,6 @@ com/bt/shared/Auction$AuctionStatus.class
 com/bt/shared/protocol/dto/GetBidHistoryResponse.class
 com/bt/shared/protocol/dto/AuctionDto.class
 com/bt/shared/protocol/dto/BidDto.class
-com/bt/shared/SharedSmokeTest.class
 com/bt/shared/Bidder.class
 com/bt/shared/protocol/dto/GetBidHistoryRequest.class
 com/bt/shared/protocol/dto/ItemDto.class
