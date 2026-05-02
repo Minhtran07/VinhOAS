@@ -1,44 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
+<!--
+  DEPRECATED: thay bằng bidding.fxml + BiddingRoomController.
+-->
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-
-<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bt.client.controller.SecondaryController">
-    
-    <padding>
-        <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
-    </padding>
-
-    <Label text="Bidding Room">
-        <font>
-            <Font name="System Bold" size="28.0" />
-        </font>
-    </Label>
-
-    <Label fx:id="itemNameLabel" text="Item: Antique Vase (Example)">
-        <font>
-            <Font size="18.0" />
-        </font>
-    </Label>
-
-    <Label fx:id="currentPriceLabel" text="Current Price: $100.00" textFill="#2e7d32">
-        <font>
-            <Font name="System Bold" size="22.0" />
-        </font>
-    </Label>
-
-    <TextField fx:id="bidInputBox" maxWidth="200.0" promptText="Enter your bid ($)" />
-
-    <Button mnemonicParsing="false" onAction="#handlePlaceBid" style="-fx-background-color: #007bff; -fx-text-fill: white;" text="Place Bid">
-        <font>
-            <Font name="System Bold" size="14.0" />
-        </font>
-    </Button>
-
-    <Button mnemonicParsing="false" onAction="#switchToPrimary" text="Back to Auction Dashboard" />
-
-</VBox>
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" />

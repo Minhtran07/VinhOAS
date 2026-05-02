@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane styleClass="app-bg"
+            xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.bt.client.controller.SellerController">
+
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="18" styleClass="topbar">
+            <Button onAction="#back" text="← Dashboard" styleClass="button-ghost" />
+            <Label text="Quản lý sản phẩm" styleClass="topbar-title" />
+            <Region HBox.hgrow="ALWAYS" />
+            <Label fx:id="sellerInfoLabel" styleClass="topbar-user" />
+        </HBox>
+    </top>
+
+    <center>
+        <HBox spacing="20">
+            <padding><Insets top="22" right="32" bottom="28" left="32" /></padding>
+
+            <!-- Bảng item -->
+            <VBox spacing="14" HBox.hgrow="ALWAYS" styleClass="card">
+                <HBox alignment="CENTER_LEFT" spacing="10">
+                    <Label text="Sản phẩm của tôi" styleClass="h2" />
+                    <Region HBox.hgrow="ALWAYS" />
+                    <Button onAction="#refreshItems" text="↻ Làm mới" />
+                </HBox>
+
+                <TableView fx:id="itemTable" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="colItemId" text="ID" prefWidth="60" />
+                        <TableColumn fx:id="colItemName" text="TÊN" prefWidth="240" />
+                        <TableColumn fx:id="colItemCategory" text="LOẠI" prefWidth="130" />
+                        <TableColumn fx:id="colItemPrice" text="GIÁ KHỞI ĐIỂM" prefWidth="150" />
+                        <TableColumn fx:id="colItemAuction" text="PHIÊN" prefWidth="140" />
+                    </columns>
+                </TableView>
+
+                <HBox spacing="12" alignment="CENTER_LEFT">
+                    <Button fx:id="auctionBtn" onAction="#openAuctionDialog"
+                            text="ĐƯA LÊN ĐẤU GIÁ" styleClass="button-accent" />
+                    <Label text="Chọn 1 sản phẩm rồi bấm nút bên trái."
+                           styleClass="muted" />
+                    <Region HBox.hgrow="ALWAYS" />
+                    <Label fx:id="leftStatusLabel" styleClass="muted" />
+                </HBox>
+            </VBox>
+
+            <!-- Form thêm item -->
+            <VBox spacing="12" prefWidth="400" styleClass="card">
+                <Label text="Đăng sản phẩm mới" styleClass="h2" />
+                <Separator />
+
+                <Label text="LOẠI SẢN PHẨM" styleClass="label-form" />
+                <ChoiceBox fx:id="categoryChoice" prefWidth="380" prefHeight="40" />
+
+                <Label text="TÊN SẢN PHẨM" styleClass="label-form" />
+                <TextField fx:id="nameField" prefHeight="40"
+                           promptText="vd: iPhone 15 Pro" />
+
+                <Label text="MÔ TẢ" styleClass="label-form" />
+                <TextArea fx:id="descField" prefRowCount="3"
+                          promptText="Mô tả ngắn gọn về sản phẩm..." />
+
+                <Label text="GIÁ KHỞI ĐIỂM (VND)" styleClass="label-form" />
+                <TextField fx:id="priceField" prefHeight="40"
+                           promptText="vd: 1500000 hoặc 1,500,000" />
+
+                <Label text="THÔNG TIN THEO LOẠI" styleClass="label-form" />
+                <VBox fx:id="specBox" spacing="10" />
+
+                <Region VBox.vgrow="ALWAYS" />
+
+                <Button onAction="#handleCreateItem" text="TẠO SẢN PHẨM"
+                        styleClass="button-primary" maxWidth="Infinity" prefHeight="44" />
+
+                <Label fx:id="rightStatusLabel" wrapText="true" styleClass="subtitle" />
+            </VBox>
+        </HBox>
+    </center>
+</BorderPane>

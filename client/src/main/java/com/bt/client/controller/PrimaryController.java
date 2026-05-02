@@ -1,15 +1,9 @@
 package com.bt.client.controller;
 
-import java.io.IOException;
-
-import com.bt.client.App;
-
-import javafx.fxml.FXML;
-
+/**
+ * @deprecated Đã thay bởi {@link LoginController} từ Phase 6.
+ *             Giữ lại tạm để tránh break import cũ; sẽ xóa hẳn ở Phase 12.
+ */
+@Deprecated
 public class PrimaryController {
-
-    @FXML
-    private void switchToSecondary() throws IOException {
-        App.setRoot("secondary");
-    }
 }

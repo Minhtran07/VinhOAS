@@ -1,0 +1,15 @@
+# =====================================================================
+# Cấu hình server. Copy file này sang application.properties và điền
+# giá trị thật. File application.properties đã được .gitignore để
+# tránh commit credentials.
+# =====================================================================
+
+# Database
+db.url=jdbc:mysql://localhost:3306/auction_db?useSSL=false&serverTimezone=UTC
+db.username=root
+db.password=changeme
+db.pool.maxSize=10
+
+# Server socket
+server.port=1234
+server.maxClients=100

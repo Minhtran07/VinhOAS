@@ -1,38 +1,41 @@
 package com.bt.client;
 
+import com.bt.client.config.ClientConfig;
+import com.bt.client.net.ServerConnection;
+import com.bt.client.ui.SceneManager;
+
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 /**
- * JavaFX App
+ * Entry point. Khởi tạo SceneManager với màn hình Login, kết nối server bg.
  */
 public class App extends Application {
 
-    private static Scene scene;
-
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("primary"), 640, 480);
-        stage.setScene(scene);
-        stage.show();
+        SceneManager.get().init(stage, "login");
+
+        new Thread(() -> {
+            try {
+                ServerConnection.getInstance()
+                        .connect(ClientConfig.serverHost(), ClientConfig.serverPort());
+                System.out.println("[Client] Connected to "
+                        + ClientConfig.serverHost() + ":" + ClientConfig.serverPort());
+            } catch (IOException ex) {
+                System.err.println("[Client] Không kết nối được server: " + ex.getMessage());
+            }
+        }, "server-connector").start();
     }
 
-    public static void setRoot(String fxml) throws IOException {
-        scene.setRoot(loadFXML(fxml));
-    }
-
-    private static Parent loadFXML(String fxml) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/com/bt/" + fxml + ".fxml"));
-        return fxmlLoader.load();
+    @Override
+    public void stop() {
+        ServerConnection.getInstance().shutdown();
     }
 
     public static void main(String[] args) {
         launch();
     }
-
 }

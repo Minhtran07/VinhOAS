@@ -1,19 +1,15 @@
 package com.bt.server.dao;
 
-import com.bt.shared.User;
-
+/**
+ * @deprecated Đã thay thế bởi {@link DaoSmokeTest} — bao trùm rộng hơn.
+ *             Giữ class rỗng để tránh break import từ chỗ khác (nếu có)
+ *             và sẽ được xóa hẳn ở Phase 9 khi chuyển sang JUnit.
+ */
+@Deprecated
 public class TestUser {
     public static void main(String[] args) {
-        UserDAO userDAO = new UserDAO();
-        
-        // Thử đăng nhập với tài khoản admin đã tạo trong SQL
-        User u = userDAO.login("admin", "123456");
-        
-        if (u != null) {
-            System.out.println("✅ Đăng nhập thành công!");
-            System.out.println("Chào mừng " + u.getRole() + ": " + u.getUsername());
-        } else {
-            System.out.println("❌ Sai tài khoản hoặc mật khẩu!");
-        }
+        System.out.println("TestUser đã deprecated. Dùng DaoSmokeTest thay thế:");
+        System.out.println("  mvn -pl server exec:java "
+                + "-Dexec.mainClass=com.bt.server.dao.DaoSmokeTest");
     }
 }

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.bt.client.controller.RegisterController"
+      styleClass="app-bg">
+
+    <VBox styleClass="hero-panel" prefWidth="460" alignment="CENTER_LEFT" spacing="22">
+        <padding><Insets top="60" right="50" bottom="60" left="50" /></padding>
+
+        <Label text="ONLINE AUCTION SYSTEM" styleClass="brand-pill-dark" />
+
+        <VBox spacing="6">
+            <Label text="Tạo tài khoản" styleClass="h1-light" />
+            <Label text="miễn phí trong 30 giây." styleClass="h1-light" />
+        </VBox>
+
+        <Label maxWidth="340" wrapText="true" styleClass="subtitle-light"
+               text="Bidder mua sản phẩm qua đấu giá. Seller đăng sản phẩm và quản lý phiên đấu giá của mình." />
+
+        <Region VBox.vgrow="ALWAYS" />
+        <Label text="© 2026 VQTT Team"
+               style="-fx-text-fill: #64748b; -fx-font-size: 11px;" />
+    </VBox>
+
+    <StackPane HBox.hgrow="ALWAYS" styleClass="app-bg">
+        <VBox alignment="CENTER" spacing="18" maxWidth="440" styleClass="auth-form-card">
+
+            <VBox spacing="6">
+                <Label text="Đăng ký" styleClass="h1" />
+                <Label text="Tạo tài khoản mới để bắt đầu sử dụng hệ thống."
+                       styleClass="subtitle" wrapText="true" />
+            </VBox>
+
+            <VBox spacing="6">
+                <Label text="TÊN ĐĂNG NHẬP" styleClass="label-form" />
+                <TextField fx:id="usernameField" promptText="ít nhất 3 ký tự" prefHeight="42" />
+            </VBox>
+
+            <VBox spacing="6">
+                <Label text="EMAIL" styleClass="label-form" />
+                <TextField fx:id="emailField" promptText="you@example.com" prefHeight="42" />
+            </VBox>
+
+            <VBox spacing="6">
+                <Label text="MẬT KHẨU" styleClass="label-form" />
+                <PasswordField fx:id="passwordField" promptText="••••••••" prefHeight="42" />
+            </VBox>
+
+            <VBox spacing="6">
+                <Label text="VAI TRÒ" styleClass="label-form" />
+                <ChoiceBox fx:id="roleChoice" prefWidth="380" prefHeight="42" />
+            </VBox>
+
+            <Label fx:id="statusLabel" text=" " styleClass="error-text" wrapText="true" />
+
+            <Button onAction="#handleRegister" text="TẠO TÀI KHOẢN"
+                    styleClass="button-primary" maxWidth="Infinity" prefHeight="46" />
+
+            <HBox alignment="CENTER" spacing="6">
+                <Label text="Đã có tài khoản?" styleClass="subtitle" />
+                <Button onAction="#backToLogin" text="Đăng nhập"
+                        styleClass="button-link" />
+            </HBox>
+        </VBox>
+    </StackPane>
+</HBox>

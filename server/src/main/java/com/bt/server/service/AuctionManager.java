@@ -1,35 +1,55 @@
 package com.bt.server.service;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.bt.shared.Auction;
 
+/**
+ * Singleton quản lý tập các phiên đấu giá đang chạy trong JVM của server.
+ *
+ * Dùng {@link ConcurrentHashMap} để truy cập nhiều thread an toàn — cần thiết
+ * khi mỗi client kết nối được xử lý bằng một thread riêng.
+ */
 public class AuctionManager {
-    private static AuctionManager instance;
 
-    //Lưu trữ các phiên đấu giá, với key là ID của phiên đấu giá và value là đối tượng Auction tương ứng
-    private Map<String, Auction> auctions;
+    private static volatile AuctionManager instance;
+
+    /** Key = auction id (Long do DB cấp). */
+    private final ConcurrentHashMap<Long, Auction> auctions = new ConcurrentHashMap<>();
 
     private AuctionManager() {
-        auctions = new HashMap<>();
     }
 
-    //Áp dụng Singleton pattern để đảm bảo chỉ có một instance của AuctionManager tồn tại
-    public static synchronized AuctionManager getInstance() {
+    public static AuctionManager getInstance() {
         if (instance == null) {
-            instance = new AuctionManager();
+            synchronized (AuctionManager.class) {
+                if (instance == null) {
+                    instance = new AuctionManager();
+                }
+            }
         }
         return instance;
     }
 
-    //Thêm một phiên đấu giá mới vào hệ thống
     public void addAuction(Auction auction) {
+        if (auction == null || auction.getId() == null) {
+            throw new IllegalArgumentException("Auction phải có id trước khi đăng ký");
+        }
         auctions.put(auction.getId(), auction);
     }
 
-    //Lấy một phiên đấu giá theo ID
-    public Auction getAuction(String auctionId) {
-        return auctions.get(auctionId);
+    public Auction getAuction(Long auctionId) {
+        return auctionId == null ? null : auctions.get(auctionId);
+    }
+
+    public Collection<Auction> listAll() {
+        return Collections.unmodifiableCollection(auctions.values());
+    }
+
+    public void remove(Long auctionId) {
+        if (auctionId != null) auctions.remove(auctionId);
     }
 }
+

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.bt.client.controller.LoginController"
+      styleClass="app-bg">
+
+    <!-- ===================== Hero panel (trái) ===================== -->
+    <VBox styleClass="hero-panel" prefWidth="460" alignment="CENTER_LEFT" spacing="22">
+        <padding><Insets top="60" right="50" bottom="60" left="50" /></padding>
+
+        <Label text="ONLINE AUCTION SYSTEM" styleClass="brand-pill-dark" />
+
+        <VBox spacing="6">
+            <Label text="Đấu giá trực tuyến" styleClass="h1-light" />
+            <Label text="theo thời gian thực." styleClass="h1-light" />
+        </VBox>
+
+        <Label maxWidth="340" wrapText="true" styleClass="subtitle-light"
+               text="Tham gia phiên đấu giá, theo dõi diễn biến giá realtime với biểu đồ trực quan, và đặt lệnh tự động bảo vệ giá trần của bạn." />
+
+        <Region prefHeight="20" />
+
+        <VBox spacing="14">
+            <HBox spacing="14" alignment="CENTER_LEFT" styleClass="feature-item">
+                <Label text="◉" style="-fx-text-fill: #f59e0b; -fx-font-size: 18px;" />
+                <Label text="Realtime bidding với WebSocket-style push" styleClass="feature-item" />
+            </HBox>
+            <HBox spacing="14" alignment="CENTER_LEFT" styleClass="feature-item">
+                <Label text="◉" style="-fx-text-fill: #f59e0b; -fx-font-size: 18px;" />
+                <Label text="Anti-sniping tự động gia hạn phiên cuối giờ" styleClass="feature-item" />
+            </HBox>
+            <HBox spacing="14" alignment="CENTER_LEFT" styleClass="feature-item">
+                <Label text="◉" style="-fx-text-fill: #f59e0b; -fx-font-size: 18px;" />
+                <Label text="Auto-bidding theo giá trần &amp; bước nhảy" styleClass="feature-item" />
+            </HBox>
+            <HBox spacing="14" alignment="CENTER_LEFT" styleClass="feature-item">
+                <Label text="◉" style="-fx-text-fill: #f59e0b; -fx-font-size: 18px;" />
+                <Label text="Concurrency-safe với pessimistic locking" styleClass="feature-item" />
+            </HBox>
+        </VBox>
+
+        <Region VBox.vgrow="ALWAYS" />
+        <Label text="© 2026 VQTT Team — Bài tập lớn LTNC"
+               style="-fx-text-fill: #64748b; -fx-font-size: 11px;" />
+    </VBox>
+
+    <!-- ===================== Form panel (phải) ===================== -->
+    <StackPane HBox.hgrow="ALWAYS" styleClass="app-bg">
+        <VBox alignment="CENTER" spacing="22" maxWidth="420" styleClass="auth-form-card">
+
+            <VBox spacing="6">
+                <Label text="Đăng nhập" styleClass="h1" />
+                <Label text="Chào mừng quay lại. Vui lòng nhập thông tin tài khoản."
+                       styleClass="subtitle" wrapText="true" />
+            </VBox>
+
+            <VBox spacing="6">
+                <Label text="TÊN ĐĂNG NHẬP" styleClass="label-form" />
+                <TextField fx:id="usernameField" promptText="username" prefHeight="44" />
+            </VBox>
+
+            <VBox spacing="6">
+                <Label text="MẬT KHẨU" styleClass="label-form" />
+                <PasswordField fx:id="passwordField" promptText="••••••••" prefHeight="44" />
+            </VBox>
+
+            <Label fx:id="statusLabel" text=" " styleClass="error-text" wrapText="true" />
+
+            <Button onAction="#handleLogin" text="ĐĂNG NHẬP"
+                    styleClass="button-primary" maxWidth="Infinity" prefHeight="46" />
+
+            <HBox alignment="CENTER" spacing="6">
+                <Label text="Chưa có tài khoản?" styleClass="subtitle" />
+                <Button onAction="#switchToRegister" text="Đăng ký"
+                        styleClass="button-link" />
+            </HBox>
+        </VBox>
+    </StackPane>
+</HBox>

@@ -1,0 +1,3 @@
+# Cấu hình client. Copy thành client.properties (gitignore).
+server.host=localhost
+server.port=1234

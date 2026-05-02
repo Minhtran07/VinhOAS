@@ -1,45 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
+<!--
+  DEPRECATED: file FXML cũ giữ lại để tránh break tham chiếu xưa.
+  Màn hình Login mới ở login.fxml + LoginController.
+-->
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-
-<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bt.client.controller.PrimaryController">
-    
-    <padding>
-        <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
-    </padding>
-
-    <Label text="Auction Dashboard">
-        <font>
-            <Font name="System Bold" size="28.0" />
-        </font>
-    </Label>
-
-    <Label text="Select an item below to enter its bidding room:" textFill="#555555">
-        <font>
-            <Font size="16.0" />
-        </font>
-    </Label>
-
-    <Button mnemonicParsing="false" onAction="#switchToSecondary" prefHeight="60.0" prefWidth="300.0" style="-fx-background-color: #f8f9fa; -fx-border-color: #ced4da; -fx-border-radius: 5; -fx-cursor: hand;" text="Lot 1: Antique Vase&#10;Starting at: $100.00" textAlignment="CENTER">
-        <font>
-            <Font size="14.0" />
-        </font>
-    </Button>
-
-    <Button mnemonicParsing="false" onAction="#switchToSecondary" prefHeight="60.0" prefWidth="300.0" style="-fx-background-color: #f8f9fa; -fx-border-color: #ced4da; -fx-border-radius: 5; -fx-cursor: hand;" text="Lot 2: Rare Oil Painting&#10;Starting at: $500.00" textAlignment="CENTER">
-        <font>
-            <Font size="14.0" />
-        </font>
-    </Button>
-    
-    <Button mnemonicParsing="false" onAction="#switchToSecondary" prefHeight="60.0" prefWidth="300.0" style="-fx-background-color: #f8f9fa; -fx-border-color: #ced4da; -fx-border-radius: 5; -fx-cursor: hand;" text="Lot 3: Vintage Rolex&#10;Starting at: $1,200.00" textAlignment="CENTER">
-        <font>
-            <Font size="14.0" />
-        </font>
-    </Button>
-
-</VBox>
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" />

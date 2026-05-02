@@ -1,8 +1,21 @@
 package com.bt.shared;
 
+/**
+ * Quản trị viên hệ thống.
+ *
+ * Đặc thù:
+ *  - {@code accessLevel}: quy ước cấp quyền nội bộ.
+ *      1 = Moderator (xem báo cáo, xử lý tranh chấp)
+ *      3 = Admin     (mở/đóng phiên, quản lý user)
+ *      5 = SuperAdmin (cấu hình hệ thống, backup DB)
+ */
 public class Admin extends User {
 
-    // Specific attribute just for Admins (e.g., 1 = Moderator, 5 = Super Admin)
+    private static final long serialVersionUID = 1L;
+
+    public static final int MIN_LEVEL = 1;
+    public static final int MAX_LEVEL = 5;
+
     private int accessLevel;
 
     public Admin() {
@@ -10,35 +23,41 @@ public class Admin extends User {
     }
 
     public Admin(String username, String email, String password, int accessLevel) {
-        super(username, email, password); // Pass basic info up to the User class
-        this.accessLevel = accessLevel;
+        super(username, email, password);
+        setAccessLevel(accessLevel);
     }
 
     public int getAccessLevel() {
         return accessLevel;
     }
 
+    /** Set không validate — clamp [1,5]. Dùng cho DAO. */
+    public void setAccessLevelRaw(int accessLevel) {
+        this.accessLevel = Math.max(MIN_LEVEL, Math.min(MAX_LEVEL, accessLevel));
+    }
+
     public void setAccessLevel(int accessLevel) {
+        if (accessLevel < MIN_LEVEL || accessLevel > MAX_LEVEL) {
+            throw new IllegalArgumentException(
+                    "Access level phải nằm trong [" + MIN_LEVEL + ", " + MAX_LEVEL
+                            + "], nhận: " + accessLevel);
+        }
         this.accessLevel = accessLevel;
     }
 
-    // Fulfilling the Abstraction requirement from User
-    @Override
-    public String getRole() {
-        return "ADMIN";
+    public boolean isSuperAdmin() {
+        return accessLevel == MAX_LEVEL;
     }
 
-    // Polymorphism: Adding access level info to the standard display
+    @Override
+    public UserRole getRole() {
+        return UserRole.ADMIN;
+    }
+
     @Override
     public void displayInfo() {
-        super.displayInfo(); // Prints the standard ID, Username, Email
-        System.out.println("Role: " + getRole() + " | Access Level: " + accessLevel);
-    }
-
-    // Example of an Admin-specific action
-    public void banUser(User user) {
-        System.out.println("ADMIN ACTION: " + this.getUsername() + " has banned user " + user.getUsername());
-        // In the future, you could add a 'boolean isActive' to the User class and set
-        // it to false here.
+        super.displayInfo();
+        System.out.println("    └─ AccessLevel: " + accessLevel
+                + (isSuperAdmin() ? " (SUPER_ADMIN)" : ""));
     }
 }

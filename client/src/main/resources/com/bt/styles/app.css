@@ -1,0 +1,710 @@
+/* =====================================================================
+ * Online Auction System — Stylesheet
+ *
+ * Phong cách: dark navy primary + accent vàng/cam, contrast cao,
+ * inspired by Bloomberg / financial trading UI.
+ * ===================================================================== */
+
+.root {
+    -fx-font-family: "Helvetica Neue", "Inter", "Segoe UI", Arial, sans-serif;
+    -fx-font-size: 14px;
+    -fx-background-color: #f1f5f9;
+
+    /* === Color tokens === */
+    -primary:        #0f172a;   /* navy đậm — text + nền brand */
+    -primary-2:      #1e293b;   /* navy slate */
+    -primary-3:      #334155;   /* slate */
+    -accent:         #f59e0b;   /* amber — accent chính */
+    -accent-hover:   #d97706;
+    -accent-pressed: #b45309;
+    -success:        #059669;
+    -success-hover:  #047857;
+    -danger:         #dc2626;
+    -danger-2:       #b91c1c;
+    -warning:        #d97706;
+
+    -bg-app:         #f1f5f9;   /* nền cả app */
+    -bg-card:        #ffffff;
+    -bg-card-2:      #f8fafc;
+    -bg-input:       #ffffff;
+
+    -text-strong:    #0f172a;   /* tiêu đề, label đậm */
+    -text:           #1e293b;   /* body */
+    -text-secondary: #475569;   /* caption */
+    -text-muted:     #64748b;   /* hint */
+    -text-on-dark:   #f8fafc;   /* trên nền navy */
+    -text-on-dark-2: #cbd5e1;
+
+    -border:         #cbd5e1;   /* viền mặc định */
+    -border-strong:  #94a3b8;   /* viền focus inactive */
+    -border-soft:    #e2e8f0;   /* viền nhẹ */
+    -shadow:         rgba(15, 23, 42, 0.12);
+    -shadow-strong:  rgba(15, 23, 42, 0.22);
+
+    -fx-focus-color: -accent;
+    -fx-faint-focus-color: rgba(245, 158, 11, 0.18);
+}
+
+/* =====================================================================
+ * BACKGROUNDS
+ * ===================================================================== */
+
+.app-bg {
+    -fx-background-color: -bg-app;
+}
+
+/* Hero panel — nền navy dùng cho brand panel ở login */
+.hero-panel {
+    -fx-background-color: linear-gradient(to bottom right, #0f172a 0%, #1e293b 60%, #334155 100%);
+}
+
+/* =====================================================================
+ * TYPOGRAPHY
+ * ===================================================================== */
+
+.h1 {
+    -fx-font-size: 30px;
+    -fx-font-weight: 800;
+    -fx-text-fill: -text-strong;
+}
+
+.h1-light {
+    -fx-font-size: 32px;
+    -fx-font-weight: 800;
+    -fx-text-fill: -text-on-dark;
+}
+
+.h2 {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -text-strong;
+}
+
+.h2-light {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -text-on-dark;
+}
+
+.section-title {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -text-strong;
+    -fx-padding: 0 0 4 0;
+}
+
+.subtitle {
+    -fx-font-size: 13px;
+    -fx-text-fill: -text-secondary;
+}
+
+.subtitle-light {
+    -fx-font-size: 13px;
+    -fx-text-fill: -text-on-dark-2;
+}
+
+.muted {
+    -fx-font-size: 12px;
+    -fx-text-fill: -text-muted;
+}
+
+.label-form {
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -text-secondary;
+}
+
+.brand-pill {
+    -fx-font-size: 11px;
+    -fx-font-weight: 800;
+    -fx-text-fill: -accent;
+    -fx-padding: 5 12 5 12;
+    -fx-background-color: rgba(245, 158, 11, 0.15);
+    -fx-background-radius: 20;
+    -fx-border-color: rgba(245, 158, 11, 0.4);
+    -fx-border-radius: 20;
+}
+
+.brand-pill-dark {
+    -fx-font-size: 11px;
+    -fx-font-weight: 800;
+    -fx-text-fill: -accent;
+    -fx-padding: 5 12 5 12;
+    -fx-background-color: rgba(245, 158, 11, 0.18);
+    -fx-background-radius: 20;
+    -fx-border-color: rgba(245, 158, 11, 0.5);
+    -fx-border-radius: 20;
+}
+
+.feature-item {
+    -fx-text-fill: -text-on-dark;
+    -fx-font-size: 14px;
+}
+
+.feature-item .label {
+    -fx-text-fill: -text-on-dark;
+}
+
+/* =====================================================================
+ * CARDS
+ * ===================================================================== */
+
+.card {
+    -fx-background-color: -bg-card;
+    -fx-background-radius: 14;
+    -fx-border-color: -border-soft;
+    -fx-border-radius: 14;
+    -fx-padding: 24;
+    -fx-effect: dropshadow(gaussian, -shadow, 16, 0.0, 0, 4);
+}
+
+.auth-form-card {
+    -fx-background-color: -bg-card;
+    -fx-background-radius: 16;
+    -fx-padding: 40;
+}
+
+/* =====================================================================
+ * FORM CONTROLS — high contrast
+ * ===================================================================== */
+
+.text-field, .password-field, .text-area {
+    -fx-background-color: -bg-input;
+    -fx-background-radius: 10;
+    -fx-border-color: -primary-3;
+    -fx-border-radius: 10;
+    -fx-border-width: 1.5;
+    -fx-padding: 10 14 10 14;
+    -fx-font-size: 16px;
+    -fx-font-weight: 700;
+    -fx-text-fill: #000000;
+    -fx-prompt-text-fill: #94a3b8;
+    -fx-highlight-fill: rgba(245, 158, 11, 0.4);
+    -fx-highlight-text-fill: #000000;
+}
+
+/*
+ * Đảm bảo text content trong TextField luôn đen đậm. Một số theme/skin
+ * JavaFX dùng selector chi tiết hơn (.text-field .text) nên cần override
+ * tách bạch để không bị skin mặc định ghi đè.
+ */
+.text-field .text,
+.password-field .text,
+.text-area .text {
+    -fx-fill: #000000;
+    -fx-font-weight: 700;
+}
+
+.text-field, .password-field {
+    -fx-min-height: 42;
+}
+
+.text-field:focused,
+.password-field:focused,
+.text-area:focused {
+    -fx-border-color: -accent;
+    -fx-border-width: 2.5;
+    -fx-effect: dropshadow(gaussian, rgba(245, 158, 11, 0.35), 10, 0, 0, 0);
+}
+
+.text-area .content {
+    -fx-background-color: -bg-input;
+    -fx-background-radius: 10;
+}
+
+/* Caret: cam sậm to để dễ nhìn */
+.text-input {
+    -fx-caret-color: -accent-pressed;
+}
+
+.choice-box, .combo-box {
+    -fx-background-color: -bg-input;
+    -fx-background-radius: 10;
+    -fx-border-color: -border;
+    -fx-border-radius: 10;
+    -fx-border-width: 1.5;
+    -fx-padding: 8 14 8 14;
+    -fx-font-size: 14px;
+    -fx-text-fill: -text-strong;
+}
+
+.choice-box:focused, .combo-box:focused {
+    -fx-border-color: -accent;
+    -fx-border-width: 2;
+}
+
+.choice-box .label, .combo-box .label {
+    -fx-text-fill: -text-strong;
+    -fx-font-size: 14px;
+}
+
+.choice-box .arrow, .combo-box .arrow {
+    -fx-background-color: -text-secondary;
+}
+
+/* =====================================================================
+ * BUTTONS
+ * ===================================================================== */
+
+.button {
+    -fx-background-color: -bg-card;
+    -fx-background-radius: 10;
+    -fx-border-color: -border;
+    -fx-border-radius: 10;
+    -fx-border-width: 1.5;
+    -fx-text-fill: -text-strong;
+    -fx-padding: 9 18 9 18;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: -bg-card-2;
+    -fx-border-color: -primary-3;
+}
+
+.button:pressed {
+    -fx-background-color: -border-soft;
+}
+
+.button-primary {
+    -fx-background-color: -primary;
+    -fx-text-fill: -text-on-dark;
+    -fx-border-color: -primary;
+    -fx-padding: 12 26 12 26;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(gaussian, rgba(15, 23, 42, 0.25), 6, 0, 0, 2);
+}
+
+.button-primary:hover {
+    -fx-background-color: -primary-2;
+    -fx-border-color: -primary-2;
+}
+
+.button-primary:pressed {
+    -fx-background-color: -primary-3;
+}
+
+.button-accent {
+    -fx-background-color: -accent;
+    -fx-text-fill: -primary;
+    -fx-border-color: -accent;
+    -fx-padding: 12 26 12 26;
+    -fx-font-size: 14px;
+    -fx-font-weight: 800;
+    -fx-effect: dropshadow(gaussian, rgba(245, 158, 11, 0.4), 8, 0, 0, 2);
+}
+
+.button-accent:hover {
+    -fx-background-color: -accent-hover;
+    -fx-border-color: -accent-hover;
+}
+
+.button-accent:pressed {
+    -fx-background-color: -accent-pressed;
+}
+
+.button-success {
+    -fx-background-color: -success;
+    -fx-text-fill: white;
+    -fx-border-color: -success;
+    -fx-font-weight: bold;
+}
+
+.button-success:hover {
+    -fx-background-color: -success-hover;
+    -fx-border-color: -success-hover;
+}
+
+.button-danger {
+    -fx-background-color: -danger;
+    -fx-text-fill: white;
+    -fx-border-color: -danger;
+}
+
+.button-danger:hover {
+    -fx-background-color: -danger-2;
+    -fx-border-color: -danger-2;
+}
+
+.button-ghost {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-text-fill: -primary;
+    -fx-font-weight: bold;
+}
+
+.button-ghost:hover {
+    -fx-background-color: rgba(15, 23, 42, 0.06);
+    -fx-border-color: transparent;
+}
+
+.button-link {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-text-fill: -accent-hover;
+    -fx-padding: 4 6 4 6;
+    -fx-font-weight: bold;
+    -fx-underline: false;
+}
+
+.button-link:hover {
+    -fx-text-fill: -accent-pressed;
+    -fx-underline: true;
+    -fx-background-color: transparent;
+}
+
+/* =====================================================================
+ * TOP BAR
+ * ===================================================================== */
+
+.topbar {
+    -fx-background-color: -primary;
+    -fx-padding: 14 28 14 28;
+    -fx-effect: dropshadow(gaussian, -shadow-strong, 8, 0, 0, 2);
+}
+
+.topbar .label {
+    -fx-text-fill: -text-on-dark;
+}
+
+.topbar .button {
+    -fx-background-color: rgba(255, 255, 255, 0.08);
+    -fx-border-color: rgba(255, 255, 255, 0.18);
+    -fx-text-fill: -text-on-dark;
+    -fx-padding: 7 14 7 14;
+    -fx-font-size: 12px;
+}
+
+.topbar .button:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.16);
+    -fx-border-color: rgba(255, 255, 255, 0.3);
+}
+
+.topbar .button-ghost {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-text-fill: -text-on-dark-2;
+}
+
+.topbar .button-ghost:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.08);
+    -fx-text-fill: -text-on-dark;
+}
+
+.topbar-title {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -text-on-dark;
+}
+
+.topbar-user {
+    -fx-text-fill: -text-on-dark-2;
+    -fx-font-size: 12px;
+}
+
+/* =====================================================================
+ * BADGES — status pills
+ * ===================================================================== */
+
+.badge {
+    -fx-background-radius: 14;
+    -fx-padding: 4 12 4 12;
+    -fx-font-size: 11px;
+    -fx-font-weight: 800;
+}
+
+.badge-running {
+    -fx-background-color: rgba(5, 150, 105, 0.16);
+    -fx-text-fill: -success-hover;
+    -fx-border-color: rgba(5, 150, 105, 0.4);
+    -fx-border-radius: 14;
+}
+
+.badge-open {
+    -fx-background-color: rgba(245, 158, 11, 0.18);
+    -fx-text-fill: -accent-pressed;
+    -fx-border-color: rgba(245, 158, 11, 0.5);
+    -fx-border-radius: 14;
+}
+
+.badge-finished {
+    -fx-background-color: rgba(100, 116, 139, 0.18);
+    -fx-text-fill: -primary-2;
+    -fx-border-color: rgba(100, 116, 139, 0.4);
+    -fx-border-radius: 14;
+}
+
+.badge-canceled {
+    -fx-background-color: rgba(220, 38, 38, 0.16);
+    -fx-text-fill: -danger;
+    -fx-border-color: rgba(220, 38, 38, 0.4);
+    -fx-border-radius: 14;
+}
+
+/* =====================================================================
+ * PRICE DISPLAY
+ * ===================================================================== */
+
+.price-display {
+    -fx-font-size: 44px;
+    -fx-font-weight: 800;
+    -fx-text-fill: -primary;
+}
+
+.price-display-accent {
+    -fx-font-size: 44px;
+    -fx-font-weight: 800;
+    -fx-text-fill: -success-hover;
+}
+
+/* =====================================================================
+ * STATUS TEXT
+ * ===================================================================== */
+
+.error-text {
+    -fx-text-fill: -danger;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+.success-text {
+    -fx-text-fill: -success-hover;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+/* =====================================================================
+ * TABLE VIEW
+ * ===================================================================== */
+
+.table-view {
+    -fx-background-color: -bg-card;
+    -fx-background-radius: 12;
+    -fx-border-color: -border-soft;
+    -fx-border-radius: 12;
+    -fx-padding: 0;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: -primary;
+    -fx-background-radius: 12 12 0 0;
+}
+
+.table-view .column-header,
+.table-view .filler {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 12 14 12 14;
+    -fx-size: 44;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: -text-on-dark;
+    -fx-font-weight: 800;
+    -fx-font-size: 11px;
+    -fx-alignment: CENTER_LEFT;
+}
+
+.table-row-cell {
+    -fx-background-color: -bg-card;
+    -fx-border-color: transparent transparent -border-soft transparent;
+    -fx-border-width: 0 0 1 0;
+    -fx-padding: 4 0 4 0;
+    -fx-cell-size: 42;
+}
+
+.table-row-cell:odd {
+    -fx-background-color: -bg-card-2;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: rgba(245, 158, 11, 0.18);
+}
+
+.table-row-cell:hover {
+    -fx-background-color: rgba(15, 23, 42, 0.04);
+}
+
+.table-row-cell:selected:hover {
+    -fx-background-color: rgba(245, 158, 11, 0.24);
+}
+
+.table-cell {
+    -fx-padding: 10 14 10 14;
+    -fx-text-fill: -text-strong;
+    -fx-font-size: 13px;
+    -fx-border-color: transparent;
+    -fx-alignment: CENTER_LEFT;
+}
+
+/* Cell chứa button (HÀNH ĐỘNG) — gọn, không padding lớn */
+.table-cell .button {
+    -fx-padding: 6 14 6 14;
+    -fx-font-size: 11px;
+    -fx-font-weight: 800;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+}
+
+/* =====================================================================
+ * LIST VIEW
+ * ===================================================================== */
+
+.list-view {
+    -fx-background-color: -bg-card-2;
+    -fx-background-radius: 10;
+    -fx-border-color: -border-soft;
+    -fx-border-radius: 10;
+}
+
+.list-cell {
+    -fx-background-color: transparent;
+    -fx-padding: 10 14 10 14;
+    -fx-text-fill: -text-strong;
+    -fx-font-size: 13px;
+    -fx-border-color: transparent transparent -border-soft transparent;
+    -fx-border-width: 0 0 1 0;
+}
+
+.list-cell:hover {
+    -fx-background-color: rgba(15, 23, 42, 0.05);
+}
+
+.list-cell:selected {
+    -fx-background-color: rgba(245, 158, 11, 0.16);
+    -fx-text-fill: -text-strong;
+}
+
+/* =====================================================================
+ * CHARTS
+ * ===================================================================== */
+
+.chart {
+    -fx-background-color: -bg-card;
+    -fx-padding: 6;
+}
+
+.chart-plot-background {
+    -fx-background-color: -bg-card-2;
+}
+
+.chart-vertical-grid-lines,
+.chart-horizontal-grid-lines {
+    -fx-stroke: -border-soft;
+    -fx-stroke-dash-array: 3 4;
+}
+
+.axis {
+    -fx-tick-label-fill: -text-secondary;
+    -fx-tick-label-font-size: 10px;
+}
+
+.axis-label {
+    -fx-text-fill: -text-secondary;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+}
+
+.default-color0.chart-series-line {
+    -fx-stroke: -accent;
+    -fx-stroke-width: 3;
+}
+
+.default-color0.chart-line-symbol {
+    -fx-background-color: -accent, white;
+    -fx-background-insets: 0, 2.5;
+    -fx-background-radius: 6;
+    -fx-padding: 6;
+}
+
+/* =====================================================================
+ * SEPARATOR
+ * ===================================================================== */
+
+.separator .line {
+    -fx-border-color: -border-soft;
+    -fx-border-width: 1 0 0 0;
+}
+
+/* =====================================================================
+ * SCROLLBAR
+ * ===================================================================== */
+
+.scroll-bar {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: -border-strong;
+    -fx-background-radius: 6;
+}
+
+.scroll-bar .thumb:hover {
+    -fx-background-color: -text-muted;
+}
+
+.scroll-bar .track,
+.scroll-bar .increment-button,
+.scroll-bar .decrement-button {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar .increment-arrow,
+.scroll-bar .decrement-arrow {
+    -fx-shape: " ";
+    -fx-padding: 0;
+}
+
+/* =====================================================================
+ * DIALOG (Alert, custom dialog)
+ * ===================================================================== */
+
+.dialog-pane {
+    -fx-background-color: -bg-card;
+}
+
+.dialog-pane .header-panel {
+    -fx-background-color: -primary;
+    -fx-padding: 16 24 16 24;
+}
+
+.dialog-pane .header-panel .label {
+    -fx-text-fill: -text-on-dark;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+.dialog-pane .content {
+    -fx-padding: 22 28 16 28;
+    -fx-text-fill: -text;
+    -fx-font-size: 14px;
+}
+
+.dialog-pane > * > .label {
+    -fx-text-fill: -text-strong;
+    -fx-font-size: 14px;
+}
+
+.dialog-pane .button-bar {
+    -fx-padding: 8 24 18 24;
+}
+
+.dialog-pane .button-bar .button {
+    -fx-padding: 9 22 9 22;
+    -fx-font-weight: bold;
+}
+
+/* Nút mặc định (OK) — màu accent */
+.dialog-pane .button-bar .button:default {
+    -fx-background-color: -accent;
+    -fx-text-fill: -primary;
+    -fx-border-color: -accent;
+}
+
+.dialog-pane .button-bar .button:default:hover {
+    -fx-background-color: -accent-hover;
+    -fx-border-color: -accent-hover;
+}

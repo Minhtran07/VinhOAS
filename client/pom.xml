@@ -12,6 +12,14 @@
 
     <artifactId>client</artifactId>
 
+    <properties>
+        <!--
+            JavaFX 21 hỗ trợ đầy đủ macOS Apple Silicon (aarch64).
+            Maven sẽ tự kéo native lib khớp với CPU của bạn.
+        -->
+        <javafx.version>21.0.4</javafx.version>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>com.bt</groupId>
@@ -20,13 +28,23 @@
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
+            <artifactId>javafx-base</artifactId>
+            <version>${javafx.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-graphics</artifactId>
+            <version>${javafx.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
-            <version>17.0.6</version>
+            <version>${javafx.version}</version>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
-            <version>17.0.6</version>
+            <version>${javafx.version}</version>
         </dependency>
     </dependencies>
 
@@ -39,6 +57,55 @@
                 <configuration>
                     <mainClass>com.bt.client.App</mainClass>
                 </configuration>
+            </plugin>
+
+            <!--
+                Set Main-Class để khi `java -jar client.jar` không bị lỗi
+                "no main manifest attribute". JavaFX vẫn cần thêm cờ
+                module-path / add-modules vì native lib không nằm
+                trong jar; KHUYÊN DÙNG `mvn javafx:run` để Maven tự lo.
+            -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.4.1</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>com.bt.client.App</mainClass>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>libs/</classpathPrefix>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+
+            <!--
+                Copy mọi dependency (kể cả JavaFX libs) vào target/libs/ để
+                Class-Path trong manifest hoạt động. Sau `mvn package`:
+                    cd client/target
+                    java -jar client-1.0-SNAPSHOT.jar
+                vẫn có thể fail trên macOS vì JavaFX cần native modules ở
+                module-path. Dùng `mvn javafx:run` an toàn hơn.
+            -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.6.1</version>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/libs</outputDirectory>
+                            <overWriteReleases>false</overWriteReleases>
+                            <overWriteSnapshots>true</overWriteSnapshots>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

@@ -1,26 +1,38 @@
 package com.bt.shared;
 
+/**
+ * Phương tiện: ô tô, xe máy...
+ * Có thông tin hãng (make), dòng (model), số km đã đi (mileage).
+ */
 public class Vehicle extends Item {
 
-    // Specific attributes just for Vehicles
+    private static final long serialVersionUID = 1L;
+
     private String make;
     private String model;
     private int mileage;
 
-    public Vehicle(String name, String description, double startingPrice, String make, String model, int mileage) {
-        super(name, description, startingPrice); // Pass basic info up to the Item class
-        this.make = make;
-        this.model = model;
-        this.mileage = mileage;
+    public Vehicle() {
+        super();
     }
 
-    // Getters and Setters
+    public Vehicle(String name, String description, double startingPrice,
+                   String make, String model, int mileage) {
+        super(name, description, startingPrice);
+        setMake(make);
+        setModel(model);
+        setMileage(mileage);
+    }
+
     public String getMake() {
         return make;
     }
 
     public void setMake(String make) {
-        this.make = make;
+        if (make == null || make.trim().isEmpty()) {
+            throw new IllegalArgumentException("Hãng (make) không được để trống");
+        }
+        this.make = make.trim();
     }
 
     public String getModel() {
@@ -28,7 +40,10 @@ public class Vehicle extends Item {
     }
 
     public void setModel(String model) {
-        this.model = model;
+        if (model == null || model.trim().isEmpty()) {
+            throw new IllegalArgumentException("Model không được để trống");
+        }
+        this.model = model.trim();
     }
 
     public int getMileage() {
@@ -36,20 +51,25 @@ public class Vehicle extends Item {
     }
 
     public void setMileage(int mileage) {
+        if (mileage < 0) {
+            throw new IllegalArgumentException("Mileage không được âm: " + mileage);
+        }
         this.mileage = mileage;
     }
 
-    // Fulfilling the Abstraction requirement from Item
+    /** Raw setter cho DAO. */
+    public void setMakeRaw(String make) { this.make = make; }
+    public void setModelRaw(String model) { this.model = model; }
+    public void setMileageRaw(int mileage) { this.mileage = Math.max(0, mileage); }
+
     @Override
-    public String getCategory() {
-        return "VEHICLE";
+    public ItemCategory getCategory() {
+        return ItemCategory.VEHICLE;
     }
 
-    // Polymorphism: Adding vehicle info to the standard display
     @Override
     public void displayInfo() {
-        super.displayInfo(); // Prints the standard ID, Name, Starting Price
-        System.out.println(
-                "Category: " + getCategory() + " | Vehicle: " + make + " " + model + " | Mileage: " + mileage + " km");
+        super.displayInfo();
+        System.out.println("    └─ " + make + " " + model + " | Mileage: " + mileage + " km");
     }
 }
