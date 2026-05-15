@@ -5,6 +5,7 @@ import com.bt.shared.Bidder;
 import com.bt.shared.Seller;
 import com.bt.shared.User;
 import com.bt.shared.UserRole;
+import com.bt.shared.protocol.dto.UserSummaryDto;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -124,6 +125,74 @@ public class UserDAO {
             e.printStackTrace();
             return false;
         }
+    }
+
+    /**
+     * Liệt kê user cho admin panel — trả về DTO trực tiếp (kèm is_active +
+     * created_at). Tách method riêng để tránh phải gắn field {@code active}
+     * vào entity User chỉ phục vụ admin.
+     *
+     * Filter: roleFilter null = mọi role, activeFilter null = mọi trạng thái.
+     */
+    public List<UserSummaryDto> listForAdmin(UserRole roleFilter, Boolean activeFilter) {
+        StringBuilder sql = new StringBuilder("SELECT * FROM users WHERE 1=1");
+        if (roleFilter != null) sql.append(" AND role = ?");
+        if (activeFilter != null) sql.append(" AND is_active = ?");
+        sql.append(" ORDER BY id ASC");
+
+        List<UserSummaryDto> list = new ArrayList<>();
+        try (Connection c = DatabaseConnection.getConnection();
+                PreparedStatement ps = c.prepareStatement(sql.toString())) {
+            int idx = 1;
+            if (roleFilter != null) {
+                ps.setString(idx++, roleFilter.name());
+            }
+            if (activeFilter != null) {
+                ps.setInt(idx++, activeFilter ? 1 : 0);
+            }
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) list.add(mapSummary(rs));
+            }
+        } catch (SQLException e) {
+            System.err.println("[UserDAO] listForAdmin fail: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    private UserSummaryDto mapSummary(ResultSet rs) throws SQLException {
+        UserSummaryDto d = new UserSummaryDto();
+        d.setUserId(rs.getLong("id"));
+        d.setUsername(rs.getString("username"));
+        d.setEmail(rs.getString("email"));
+        UserRole role = UserRole.fromString(rs.getString("role"));
+        d.setRole(role == null ? UserRole.BIDDER : role);
+        // is_active default 1 nếu NULL (cột cũ trước migration)
+        int activeInt = rs.getInt("is_active");
+        d.setActive(rs.wasNull() ? true : activeInt == 1);
+        d.setAccountBalance(rs.getDouble("account_balance"));
+        d.setSellerRating(rs.getDouble("seller_rating"));
+        d.setAccessLevel(safeInt(rs, "access_level", 1));
+        d.setCreatedAt(SqlTime.getLocalDateTime(rs, "created_at"));
+        return d;
+    }
+
+    /** Lấy trạng thái active hiện tại của 1 user — admin dùng để verify sau update. */
+    public Optional<Boolean> isActive(long userId) {
+        try (Connection c = DatabaseConnection.getConnection();
+                PreparedStatement ps = c.prepareStatement(
+                        "SELECT is_active FROM users WHERE id = ?")) {
+            ps.setLong(1, userId);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    int v = rs.getInt(1);
+                    return Optional.of(rs.wasNull() ? true : v == 1);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return Optional.empty();
     }
 
     /** Vô hiệu hóa user (admin ban). */

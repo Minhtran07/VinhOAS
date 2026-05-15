@@ -22,6 +22,8 @@ import com.bt.shared.protocol.dto.ListAuctionsRequest;
 import com.bt.shared.protocol.dto.ListAuctionsResponse;
 import com.bt.shared.protocol.dto.ListMyItemsRequest;
 import com.bt.shared.protocol.dto.ListMyItemsResponse;
+import com.bt.shared.protocol.dto.ListUsersRequest;
+import com.bt.shared.protocol.dto.ListUsersResponse;
 import com.bt.shared.protocol.dto.LoginRequest;
 import com.bt.shared.protocol.dto.LoginResponse;
 import com.bt.shared.protocol.dto.PayAuctionRequest;
@@ -34,8 +36,12 @@ import com.bt.shared.protocol.dto.RegisterAutoBidRequest;
 import com.bt.shared.protocol.dto.RegisterAutoBidResponse;
 import com.bt.shared.protocol.dto.RegisterRequest;
 import com.bt.shared.protocol.dto.RegisterResponse;
+import com.bt.shared.protocol.dto.SetUserActiveRequest;
+import com.bt.shared.protocol.dto.SetUserActiveResponse;
 import com.bt.shared.protocol.dto.SubscribeRequest;
 import com.bt.shared.protocol.dto.SubscriptionResponse;
+import com.bt.shared.protocol.dto.UserSummaryDto;
+import com.bt.shared.UserRole;
 
 import java.io.IOException;
 import java.util.List;
@@ -155,6 +161,24 @@ public class AuctionClient {
         Message resp = sendOrThrow(MessageType.RATE_SELLER_REQUEST,
                 new RateSellerRequest(auctionId, stars, comment));
         return MessageCodec.payloadAs(resp, RateSellerResponse.class);
+    }
+
+    // ---------- Admin ----------
+
+    /** Liệt kê user (admin only). Filter null = không lọc. */
+    public List<UserSummaryDto> listUsers(UserRole roleFilter, Boolean activeFilter)
+            throws AuctionClientException {
+        Message resp = sendOrThrow(MessageType.LIST_USERS_REQUEST,
+                new ListUsersRequest(roleFilter, activeFilter));
+        return MessageCodec.payloadAs(resp, ListUsersResponse.class).getUsers();
+    }
+
+    /** Ban (active=false) / unban (active=true) user. Admin only. */
+    public SetUserActiveResponse setUserActive(long userId, boolean active)
+            throws AuctionClientException {
+        Message resp = sendOrThrow(MessageType.SET_USER_ACTIVE_REQUEST,
+                new SetUserActiveRequest(userId, active));
+        return MessageCodec.payloadAs(resp, SetUserActiveResponse.class);
     }
 
     /** Heartbeat — gửi PING, đo RTT bằng response. Không throw nếu fail; trả -1. */

@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
@@ -15,22 +18,48 @@
     <top>
         <HBox alignment="CENTER_LEFT" spacing="18" styleClass="topbar">
             <Button onAction="#back" text="← Dashboard" styleClass="button-ghost" />
-            <Label text="Bảng điều khiển Admin" styleClass="topbar-title" />
+            <Label text="🛡 Bảng điều khiển Admin" styleClass="topbar-title" />
             <Region HBox.hgrow="ALWAYS" />
+            <Label fx:id="userInfoLabel" styleClass="topbar-user" />
         </HBox>
     </top>
 
     <center>
-        <VBox alignment="CENTER" spacing="24">
-            <padding><Insets top="80" right="40" bottom="40" left="40" /></padding>
+        <VBox spacing="16">
+            <padding><Insets top="22" right="32" bottom="28" left="32" /></padding>
 
-            <VBox spacing="18" maxWidth="540" alignment="CENTER" styleClass="card">
-                <Label text="🛡" style="-fx-font-size: 48px;" />
-                <Label text="Khu vực quản trị" styleClass="h1" />
-                <Label styleClass="subtitle" wrapText="true" textAlignment="CENTER"
-                       text="Tính năng quản lý người dùng (ban / unban), xem báo cáo doanh thu, force-cancel phiên đấu giá đang trong giai đoạn phát triển." />
-                <Button onAction="#back" text="VỀ DASHBOARD" styleClass="button-primary" />
+            <HBox alignment="CENTER_LEFT" spacing="14">
+                <Label text="Quản lý người dùng" styleClass="h2" />
+                <Region HBox.hgrow="ALWAYS" />
+                <Label text="ROLE" styleClass="label-form" />
+                <ChoiceBox fx:id="roleFilter" prefWidth="120" />
+                <Label text="TRẠNG THÁI" styleClass="label-form" />
+                <ChoiceBox fx:id="activeFilter" prefWidth="120" />
+                <Button onAction="#refresh" text="↻ Làm mới" />
+            </HBox>
+
+            <VBox VBox.vgrow="ALWAYS" spacing="0" styleClass="card">
+                <padding><Insets top="0" right="0" bottom="0" left="0" /></padding>
+                <TableView fx:id="userTable" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="colId" text="ID" prefWidth="55" />
+                        <TableColumn fx:id="colUsername" text="USERNAME" prefWidth="160" />
+                        <TableColumn fx:id="colEmail" text="EMAIL" prefWidth="220" />
+                        <TableColumn fx:id="colRole" text="ROLE" prefWidth="90" />
+                        <TableColumn fx:id="colExtra" text="THÔNG TIN" prefWidth="180" />
+                        <TableColumn fx:id="colActive" text="TRẠNG THÁI" prefWidth="120" />
+                        <TableColumn fx:id="colCreated" text="ĐĂNG KÝ" prefWidth="140" />
+                        <TableColumn fx:id="colAction" text="HÀNH ĐỘNG" prefWidth="130" />
+                    </columns>
+                </TableView>
             </VBox>
+
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <Label text="ℹ Lưu ý: BAN không xoá tài khoản — chỉ chặn login. UNBAN khôi phục."
+                       styleClass="muted" />
+                <Region HBox.hgrow="ALWAYS" />
+                <Label fx:id="statusLabel" styleClass="muted" />
+            </HBox>
         </VBox>
     </center>
 </BorderPane>

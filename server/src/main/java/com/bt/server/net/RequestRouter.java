@@ -3,6 +3,7 @@ package com.bt.server.net;
 import com.bt.server.event.AuctionEventBus;
 import com.bt.server.event.ConnectionObserver;
 import com.bt.server.event.ConnectionRegistry;
+import com.bt.server.service.AdminService;
 import com.bt.server.service.AuctionService;
 import com.bt.server.service.AuthService;
 import com.bt.server.service.PaymentService;
@@ -35,6 +36,8 @@ import com.bt.shared.protocol.dto.ItemDto;
 import com.bt.shared.protocol.dto.ListAuctionsRequest;
 import com.bt.shared.protocol.dto.ListAuctionsResponse;
 import com.bt.shared.protocol.dto.ListMyItemsResponse;
+import com.bt.shared.protocol.dto.ListUsersRequest;
+import com.bt.shared.protocol.dto.ListUsersResponse;
 import com.bt.shared.protocol.dto.LoginRequest;
 import com.bt.shared.protocol.dto.LoginResponse;
 import com.bt.shared.protocol.dto.PayAuctionRequest;
@@ -47,8 +50,11 @@ import com.bt.shared.protocol.dto.RegisterAutoBidRequest;
 import com.bt.shared.protocol.dto.RegisterAutoBidResponse;
 import com.bt.shared.protocol.dto.RegisterRequest;
 import com.bt.shared.protocol.dto.RegisterResponse;
+import com.bt.shared.protocol.dto.SetUserActiveRequest;
+import com.bt.shared.protocol.dto.SetUserActiveResponse;
 import com.bt.shared.protocol.dto.SubscribeRequest;
 import com.bt.shared.protocol.dto.SubscriptionResponse;
+import com.bt.shared.protocol.dto.UserSummaryDto;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -73,6 +79,7 @@ public class RequestRouter {
     private final SellerService sellerService;
     private final PaymentService paymentService;
     private final RatingService ratingService;
+    private final AdminService adminService;
     private final AuctionEventBus eventBus;
     private final ConnectionRegistry registry;
     private final ConnectionObserver observer;
@@ -80,6 +87,7 @@ public class RequestRouter {
     public RequestRouter(ClientConnection conn, AuthService authService,
                          AuctionService auctionService, SellerService sellerService,
                          PaymentService paymentService, RatingService ratingService,
+                         AdminService adminService,
                          AuctionEventBus eventBus, ConnectionRegistry registry) {
         this.conn = conn;
         this.authService = authService;
@@ -87,6 +95,7 @@ public class RequestRouter {
         this.sellerService = sellerService;
         this.paymentService = paymentService;
         this.ratingService = ratingService;
+        this.adminService = adminService;
         this.eventBus = eventBus;
         this.registry = registry;
         this.observer = new ConnectionObserver(conn);
@@ -131,6 +140,8 @@ public class RequestRouter {
                 case CREATE_AUCTION_REQUEST:         handleCreateAuction(msg); break;
                 case PAY_AUCTION_REQUEST:            handlePayAuction(msg); break;
                 case RATE_SELLER_REQUEST:            handleRateSeller(msg); break;
+                case LIST_USERS_REQUEST:             handleListUsers(msg); break;
+                case SET_USER_ACTIVE_REQUEST:        handleSetUserActive(msg); break;
                 case PING_REQUEST:                   handlePing(msg); break;
                 default:
                     sendError(msg, ErrorCode.UNSUPPORTED_TYPE,
@@ -350,6 +361,27 @@ public class RequestRouter {
         RateSellerResponse resp = ratingService.rate(req.getAuctionId(),
                 conn.getUserId(), req.getStars(), req.getComment());
         send(MessageType.RATE_SELLER_RESPONSE, msg.getRequestId(), resp);
+    }
+
+    // ---------- Admin ----------
+
+    private void handleListUsers(Message msg) throws IOException, ValidationException {
+        requireRole(msg, UserRole.ADMIN);
+        ListUsersRequest req = msg.getPayload() == null
+                ? new ListUsersRequest(null, null)
+                : MessageCodec.payloadAs(msg, ListUsersRequest.class);
+        List<UserSummaryDto> users = adminService.listUsers(
+                req.getRoleFilter(), req.getActiveFilter());
+        send(MessageType.LIST_USERS_RESPONSE, msg.getRequestId(),
+                new ListUsersResponse(users));
+    }
+
+    private void handleSetUserActive(Message msg) throws IOException, ValidationException {
+        requireRole(msg, UserRole.ADMIN);
+        SetUserActiveRequest req = MessageCodec.payloadAs(msg, SetUserActiveRequest.class);
+        SetUserActiveResponse resp = adminService.setUserActive(
+                conn.getUserId(), req.getUserId(), req.isActive());
+        send(MessageType.SET_USER_ACTIVE_RESPONSE, msg.getRequestId(), resp);
     }
 
     // ---------- Heartbeat ----------

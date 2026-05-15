@@ -70,6 +70,12 @@ public enum MessageType {
     PING_REQUEST,
     PONG_RESPONSE,
 
+    // ==== ADMIN (Phase 12) ====
+    LIST_USERS_REQUEST,
+    LIST_USERS_RESPONSE,
+    SET_USER_ACTIVE_REQUEST,
+    SET_USER_ACTIVE_RESPONSE,
+
     // ==== ERROR ====
     ERROR_RESPONSE
 }

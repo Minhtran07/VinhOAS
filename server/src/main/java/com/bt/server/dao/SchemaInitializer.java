@@ -63,6 +63,9 @@ public final class SchemaInitializer {
         // Khi auction chuyển từ FINISHED → PAID, các cột này được set.
         addColumnIfMissing(c, "auctions", "paid_at", "TEXT");
         addColumnIfMissing(c, "auctions", "paid_amount", "REAL");
+        // Admin: cột is_active cho phép ban/unban user. DB tạo từ schema mới
+        // đã có sẵn cột này; cần đảm bảo cho DB cũ.
+        addColumnIfMissing(c, "users", "is_active", "INTEGER NOT NULL DEFAULT 1");
     }
 
     /**

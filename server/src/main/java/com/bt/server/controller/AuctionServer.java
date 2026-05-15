@@ -13,6 +13,7 @@ import com.bt.server.event.AuctionEventBus;
 import com.bt.server.event.ConnectionRegistry;
 import com.bt.server.net.ClientConnection;
 import com.bt.server.net.RequestRouter;
+import com.bt.server.service.AdminService;
 import com.bt.server.service.AuctionLifecycleScheduler;
 import com.bt.server.service.AuctionService;
 import com.bt.server.service.AuthService;
@@ -66,6 +67,7 @@ public class AuctionServer {
                 new SellerService(itemDAO, auctionDAO, userDAO, auctionService, registry, eventBus);
         PaymentService paymentService = new PaymentService(userDAO, registry);
         RatingService ratingService = new RatingService();
+        AdminService adminService = new AdminService(userDAO);
 
         AuctionLifecycleScheduler lifecycle = new AuctionLifecycleScheduler(
                 auctionDAO, bidDAO, userDAO, eventBus, new HighestBidStrategy());
@@ -107,7 +109,7 @@ public class AuctionServer {
                         RequestRouter router = new RequestRouter(
                                 conn, authService, auctionService,
                                 sellerService, paymentService, ratingService,
-                                eventBus, registry);
+                                adminService, eventBus, registry);
                         router.serve();
                     });
                 } catch (IOException ioe) {
